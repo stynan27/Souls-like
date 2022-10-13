@@ -13,9 +13,27 @@ namespace MOOSE
     public float mouseY;
 
     PlayerControls inputActions;
-
+    CameraHandler cameraHandler;
     Vector2 movementInput;
     Vector2 cameraInput;
+
+    // Used to init variables or states before the application starts
+    private void Awake()
+    {
+      cameraHandler = CameraHandler.singleton;
+    }
+
+    // called every fixed frame-rate frame
+    private void FixedUpdate()
+    {
+      float delta = Time.fixedDeltaTime; // rate of time in seconds that the game is updating between frames
+
+      if (cameraHandler != null)
+      {
+        cameraHandler.FollowTarget(delta);
+        cameraHandler.handleCameraRotation(delta, mouseX, mouseY);
+      }
+    }
 
     public void OnEnable()
     {

@@ -43,6 +43,7 @@ namespace MOOSE
       moveDirection = cameraObject.forward * inputHandler.vertical;
       moveDirection += cameraObject.right * inputHandler.horizontal;
       moveDirection.Normalize();
+      moveDirection.y = 0; // freeze y axis movement to prevent player levitation
 
       float speed = movementSpeed;
       moveDirection *= speed;
